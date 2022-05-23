@@ -6,6 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 
 import {DoublePressable} from '../doublePressable';
+import {Carousel} from '../carousel';
 import {styles} from './styles';
 import colors from '../../themes/colors';
 import {IPost} from '../../types/models';
@@ -32,13 +33,17 @@ export const FeedPost: FC<FeedpostProps> = ({post}) => {
   let content = null;
   if (post.image) {
     content = (
-      <Image
-        source={{
-          uri: image,
-        }}
-        style={styles.image}
-      />
+      <DoublePressable action={toggleLike}>
+        <Image
+          source={{
+            uri: image,
+          }}
+          style={styles.image}
+        />
+      </DoublePressable>
     );
+  } else if (post.images) {
+    content = <Carousel images={post.images} onDoublePress={toggleLike} />;
   }
 
   return (
@@ -59,7 +64,7 @@ export const FeedPost: FC<FeedpostProps> = ({post}) => {
         />
       </View>
       {/* Content */}
-      <DoublePressable action={toggleLike}>{content}</DoublePressable>
+      {content}
       {/* Footer */}
       <View style={styles.footer}>
         <View style={styles.iconContainer}>
