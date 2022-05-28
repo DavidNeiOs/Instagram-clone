@@ -11,12 +11,14 @@ import {styles} from './styles';
 import colors from '../../themes/colors';
 import {IPost} from '../../types/models';
 import {Comment} from '../comment';
+import {VideoPlayer} from '../video-player';
 
 export interface FeedpostProps {
   post: IPost;
+  isVisible: boolean;
 }
 
-export const FeedPost: FC<FeedpostProps> = ({post}) => {
+export const FeedPost: FC<FeedpostProps> = ({post, isVisible}) => {
   const [isDescriptionShown, setIsDescriptionShown] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const {image, createdAt, description, nofComments, nofLikes, user, comments} =
@@ -44,6 +46,12 @@ export const FeedPost: FC<FeedpostProps> = ({post}) => {
     );
   } else if (post.images) {
     content = <Carousel images={post.images} onDoublePress={toggleLike} />;
+  } else if (post.video) {
+    content = (
+      <DoublePressable action={toggleLike}>
+        <VideoPlayer uri={post.video} paused={!isVisible} />
+      </DoublePressable>
+    );
   }
 
   return (
