@@ -123,7 +123,7 @@ export const FeedPost: FC<FeedpostProps> = ({post, isVisible}) => {
           <Text style={styles.mutedText}>View all {nofComments} comments</Text>
         ) : null}
         {comments.map(comment => (
-          <Comment key={comment.id} comment={comment} />
+          <Comment key={comment.id} comment={comment} showDetails={false} />
         ))}
         {/* Post date */}
         <Text style={styles.mutedText}>{createdAt}</Text>
