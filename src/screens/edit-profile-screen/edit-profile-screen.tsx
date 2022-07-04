@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,7 @@ import {
   UseControllerProps,
   SubmitHandler,
 } from 'react-hook-form';
+import {launchImageLibrary, Asset} from 'react-native-image-picker';
 
 import user from '../../assets/data/user.json';
 import colors from '../../themes/colors';
@@ -21,7 +22,7 @@ import {size, weight} from '../../themes/fonts';
 import {IUser} from '../../types/models';
 
 const URL_REGEX =
-  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 type IEditableUser = Pick<IUser, 'name' | 'username' | 'website' | 'bio'>;
 
@@ -69,6 +70,7 @@ const CustomInput: FC<CustomInputProps> = ({
 );
 
 export const EditProfileScreen = () => {
+  const [selectedPic, setSelectedPic] = useState<Asset | null>(null);
   const {control, handleSubmit} = useForm<IEditableUser>({
     defaultValues: {
       name: user.name,
@@ -82,11 +84,29 @@ export const EditProfileScreen = () => {
     console.log('submit', data);
   };
 
+  const onChangePhoto = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+      },
+      ({didCancel, errorCode, errorMessage, assets}) => {
+        if (!didCancel && !errorCode && assets) {
+          setSelectedPic(assets[0]);
+        }
+      },
+    );
+  };
+
   return (
     <SafeAreaView>
       <View style={styles.page}>
-        <Image source={{uri: user.image}} style={styles.avatar} />
-        <Text style={styles.textButton}>Change profile photo</Text>
+        <Image
+          source={{uri: selectedPic ? selectedPic.uri : user.image}}
+          style={styles.avatar}
+        />
+        <Text onPress={onChangePhoto} style={styles.textButton}>
+          Change profile photo
+        </Text>
         <CustomInput
           control={control}
           name="name"
