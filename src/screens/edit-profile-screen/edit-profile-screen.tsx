@@ -89,7 +89,7 @@ export const EditProfileScreen = () => {
       {
         mediaType: 'photo',
       },
-      ({didCancel, errorCode, errorMessage, assets}) => {
+      ({didCancel, errorCode, assets}) => {
         if (!didCancel && !errorCode && assets) {
           setSelectedPic(assets[0]);
         }
