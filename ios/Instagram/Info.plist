@@ -39,6 +39,10 @@
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need this permission to let you upload photos in your library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow Instagram to use the camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow Instagram to use the microphone</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
