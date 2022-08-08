@@ -1,3 +1,4 @@
+import android.os.Bundle;
 package com.instagram;
 import expo.modules.ReactActivityDelegateWrapper;
 
@@ -23,6 +24,11 @@ public class MainActivity extends ReactActivity {
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new ReactActivityDelegateWrapper(this, new MainActivityDelegate(this, getMainComponentName()));
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
   }
 
   public static class MainActivityDelegate extends ReactActivityDelegate {

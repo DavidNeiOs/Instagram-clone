@@ -6,8 +6,9 @@ import {IUser} from '../../types/models';
 
 interface ProfileHeaderProps {
   user: IUser;
+  onEditPress: () => void;
 }
-export const ProfileHeader: FC<ProfileHeaderProps> = ({user}) => {
+export const ProfileHeader: FC<ProfileHeaderProps> = ({user, onEditPress}) => {
   return (
     <SafeAreaView>
       <View style={styles.root}>
@@ -37,10 +38,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({user}) => {
 
         {/* Buttons */}
         <View style={{flexDirection: 'row'}}>
-          <Button
-            text="Edit profile"
-            onPress={() => console.warn('on edit prof')}
-          />
+          <Button text="Edit profile" onPress={onEditPress} />
           <Button
             text="Another button"
             onPress={() => console.warn('on another')}

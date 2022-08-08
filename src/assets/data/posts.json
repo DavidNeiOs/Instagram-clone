@@ -27,6 +27,38 @@
           "id": "u1",
           "username": "vadimnotjustdev"
         }
+      },
+      {
+        "id": "3",
+        "comment": "Lorem ipsum dolor sit amet consectetur adipisicing elit. H",
+        "user": {
+          "id": "u1",
+          "username": "vadimnotjustdev"
+        }
+      },
+      {
+        "id": "4",
+        "comment": "Lorem ipsum dolor sit amet consectetur adipisicing elit. H",
+        "user": {
+          "id": "u1",
+          "username": "vadimnotjustdev"
+        }
+      },
+      {
+        "id": "5",
+        "comment": "Lorem ipsum dolor sit amet consectetur adipisicing elit. H",
+        "user": {
+          "id": "u1",
+          "username": "vadimnotjustdev"
+        }
+      },
+      {
+        "id": "6",
+        "comment": "Lorem ipsum dolor sit amet consectetur adipisicing elit. H",
+        "user": {
+          "id": "u1",
+          "username": "vadimnotjustdev"
+        }
       }
     ]
   },

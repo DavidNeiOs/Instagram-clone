@@ -4,6 +4,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import {useNavigation} from '@react-navigation/native';
 
 import {DoublePressable} from '../doublePressable';
 import {Carousel} from '../carousel';
@@ -21,6 +22,7 @@ export interface FeedpostProps {
 export const FeedPost: FC<FeedpostProps> = ({post, isVisible}) => {
   const [isDescriptionShown, setIsDescriptionShown] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const navigation = useNavigation();
   const {image, createdAt, description, nofComments, nofLikes, user, comments} =
     post;
 
@@ -54,6 +56,14 @@ export const FeedPost: FC<FeedpostProps> = ({post, isVisible}) => {
     );
   }
 
+  const navigateToUser = () => {
+    navigation.navigate('Profile', {userId: post.user.id});
+  };
+
+  const navigateToComments = () => {
+    navigation.navigate('Comments', {postId: post.id});
+  };
+
   return (
     <View style={styles.post}>
       {/* Header */}
@@ -64,7 +74,9 @@ export const FeedPost: FC<FeedpostProps> = ({post, isVisible}) => {
           }}
           style={styles.userAvatar}
         />
-        <Text style={styles.userName}>{user.username}</Text>
+        <Text onPress={navigateToUser} style={styles.userName}>
+          {user.username}
+        </Text>
         <Entypo
           name="dots-three-horizontal"
           size={16}
@@ -120,7 +132,9 @@ export const FeedPost: FC<FeedpostProps> = ({post, isVisible}) => {
 
         {/* Comments */}
         {comments.length > 2 ? (
-          <Text style={styles.mutedText}>View all {nofComments} comments</Text>
+          <Text onPress={navigateToComments} style={styles.mutedText}>
+            View all {nofComments} comments
+          </Text>
         ) : null}
         {comments.map(comment => (
           <Comment key={comment.id} comment={comment} showDetails={false} />
